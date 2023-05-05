@@ -85,11 +85,19 @@ public class PersonaService implements  IPersonaService {
         return  personaRepository.save(persona);
     }
 
-    @Override
-    public Persona borrar(Long id) throws Exception {
 
-        return personaRepository.delete(id);
+    @Override
+    @Transactional()
+    public void borrar(Long id) throws Exception {
+
+        if (id==null || id<1){
+            throw new Exception("El id enviado no es valido");
+        }
+
+        personaRepository.deleteById(id);
     }
+
+
 }
 
 

@@ -1,6 +1,7 @@
 package com.ps.registro.controller;
 
 import com.ps.registro.modelo.Persona;
+import com.ps.registro.modelo.ResponseErrorDTO;
 import com.ps.registro.services.IPersonaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,11 +67,12 @@ public class PersonaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> borrar(@PathVariable("id") Long id) {
         try {
-            Persona resultado = iPersonaService.borrar(id);
+
+            iPersonaService.borrar(id);
 
             return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(resultado);
+                    .ok().build();
+
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseErrorDTO(HttpStatus.BAD_REQUEST.toString(), e.getCause() + "", e.getMessage()));

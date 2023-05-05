@@ -1,5 +1,7 @@
 package com.ps.registro.modelo;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,6 +10,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "Registro")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Registro {
 
     @Id
@@ -19,6 +22,6 @@ public class Registro {
 
     @ManyToOne
     @JoinColumn(name="persona_id", referencedColumnName="id", nullable=false)
-    private Persona persona_id;
+    private Registro persona_id;
 
 }
